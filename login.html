@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JellySpa - Iniciar sesion</title>
+  <link rel="stylesheet" href="css/stilos.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h2>JellySpa</h2>
+      <div class="nav-links">
+        <a class="nav-button nav-secondary" href="Index.html">Inicio</a>
+        <a class="nav-button nav-primary" href="registro.html">Registrarse</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="form-page">
+    <section class="form-card">
+      <h1>Iniciar sesion</h1>
+      <p>Accede para reservar tu proxima cita.</p>
+      <form id="loginForm">
+        <label for="correo">Correo electronico</label>
+        <input id="correo" type="email" placeholder="tu@correo.com" required>
+
+        <label for="password">Contrasena</label>
+        <input id="password" type="password" placeholder="Contrasena" minlength="8" required>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+      <p class="form-footer">
+        <a href="recuperar.html">Olvide mi contrasena</a>
+      </p>
+      <p class="form-footer">
+        No tienes cuenta? <a href="registro.html">Registrate aqui</a>
+      </p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>2026 JellySpa. Tu estilo, tu brillo.</p>
+  </footer>
+  <a class="whatsapp-float" href="https://wa.me/573206479635" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">WhatsApp</a>
+
+  <script src="css/js/api.js"></script>
+  <script src="css/js/login.js"></script>
+</body>
+</html>

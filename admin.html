@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JellySpa - Administrador</title>
+  <link rel="stylesheet" href="css/stilos.css">
+</head>
+<body class="admin-dashboard-body">
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div>
+        <h1>Panel de Administracion</h1>
+        <p>Bienvenido, Administrador</p>
+      </div>
+      <div class="admin-header-actions">
+        <button id="refreshAdmin" class="admin-action admin-action-refresh" type="button">Actualizar</button>
+        <button id="logoutAdmin" class="admin-action admin-action-logout" type="button">Cerrar Sesion</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-dashboard">
+    <section class="admin-metrics" aria-label="Resumen de reservas">
+      <article class="admin-stat">
+        <span class="admin-stat-icon admin-stat-pending" aria-hidden="true">P</span>
+        <div>
+          <span>Pendientes</span>
+          <strong id="pendingReservations">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat">
+        <span class="admin-stat-icon admin-stat-confirmed" aria-hidden="true">C</span>
+        <div>
+          <span>Confirmadas</span>
+          <strong id="confirmedReservations">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat">
+        <span class="admin-stat-icon admin-stat-paid" aria-hidden="true">G</span>
+        <div>
+          <span>Pagadas</span>
+          <strong id="paidReservations">0</strong>
+        </div>
+      </article>
+      <article class="admin-stat">
+        <span class="admin-stat-icon admin-stat-total" aria-hidden="true">T</span>
+        <div>
+          <span>Total Reservas</span>
+          <strong id="totalReservations">0</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="admin-card">
+      <h2>Reservas Recientes</h2>
+      <div id="adminTableContainer"></div>
+    </section>
+  </main>
+
+  <script src="css/js/api.js"></script>
+  <script src="css/js/andmin.js"></script>
+</body>
+</html>

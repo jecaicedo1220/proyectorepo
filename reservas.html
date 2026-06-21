@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JellySpa - Mis Reservas</title>
+  <link rel="stylesheet" href="css/stilos.css">
+</head>
+<body class="user-dashboard-body">
+  <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
+
+  <header class="admin-header user-header">
+    <div class="admin-header-inner">
+      <a class="user-back-button" href="Index.html">Volver</a>
+      <div class="user-header-title">
+        <h1>Mis Reservas</h1>
+        <p id="welcomeText">Bienvenido</p>
+      </div>
+      <div class="admin-header-actions">
+        <button id="refreshButton" class="admin-action user-action-refresh" type="button">
+          <span aria-hidden="true">Actualizar</span>
+        </button>
+        <button id="logoutButton" class="admin-action admin-action-logout" type="button">
+          <span aria-hidden="true">Cerrar Sesion</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="user-dashboard">
+    <section class="user-metrics" aria-label="Resumen de mis reservas">
+      <article class="user-stat user-stat-pending-card">
+        <span class="admin-stat-icon admin-stat-pending" aria-hidden="true">P</span>
+        <div>
+          <span>Pendientes</span>
+          <strong id="pendingCount">0</strong>
+        </div>
+      </article>
+      <article class="user-stat user-stat-confirmed-card">
+        <span class="admin-stat-icon admin-stat-confirmed" aria-hidden="true">C</span>
+        <div>
+          <span>Confirmadas</span>
+          <strong id="confirmedCount">0</strong>
+        </div>
+      </article>
+      <article class="user-stat user-stat-cancelled-card">
+        <span class="admin-stat-icon user-stat-cancelled" aria-hidden="true">X</span>
+        <div>
+          <span>Canceladas</span>
+          <strong id="cancelledCount">0</strong>
+        </div>
+      </article>
+    </section>
+
+    <section id="reservationList" class="user-reservations"></section>
+
+    <section class="new-reservation-card">
+      <h2>Nueva Reserva</h2>
+      <form id="reservaForm">
+        <label for="servicio">Servicio</label>
+        <select id="servicio" required>
+          <option value="Manicura clasica">Manicura clasica - $30.000</option>
+          <option value="Manicura en gel">Manicura en gel - $60.000</option>
+          <option value="Manicura y pedicura">Manicura y pedicura - $70.000</option>
+          <option value="Unas acrilicas">Unas acrilicas - $100.000</option>
+          <option value="Diseno Personalizado">Diseno Personalizado - $12.000</option>
+        </select>
+
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" required>
+
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" required>
+
+        <label for="telefono">Telefono</label>
+        <input type="tel" id="telefono" placeholder="Ej. 3001234567" minlength="7" maxlength="20" required>
+
+        <label for="notas">Notas</label>
+        <textarea id="notas" maxlength="500" placeholder="Ej. color preferido o detalle importante"></textarea>
+
+        <button type="submit" class="btn btn-primary">Reservar</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="paymentModal" class="payment-modal" aria-hidden="true">
+    <div class="payment-dialog" role="dialog" aria-modal="true" aria-labelledby="paymentTitle">
+      <div class="payment-head">
+        <div>
+          <h2 id="paymentTitle">Enviar pago</h2>
+          <p>Selecciona tu metodo de pago preferido. El administrador lo verificara.</p>
+        </div>
+        <button id="closePaymentModal" class="payment-close" type="button" aria-label="Cerrar">X</button>
+      </div>
+
+      <div class="payment-summary">
+        <h3>Resumen de la Reserva</h3>
+        <p><strong>Servicio:</strong> <span id="paymentService"></span></p>
+        <p><strong>Fecha:</strong> <span id="paymentDate"></span></p>
+        <p><strong>Hora:</strong> <span id="paymentHour"></span></p>
+        <strong class="payment-total">Total: <span id="paymentAmount"></span></strong>
+      </div>
+
+      <div id="paymentReceipt" class="payment-receipt" aria-hidden="true"></div>
+
+      <div class="payment-methods">
+        <h3>Metodo de Pago</h3>
+        <div class="payment-grid">
+          <button class="payment-option" type="button" data-method="pse">
+            <span class="payment-icon payment-pse" aria-hidden="true">P</span>
+            <span><strong>PSE</strong><small>Transferencia bancaria</small></span>
+          </button>
+          <button class="payment-option" type="button" data-method="nequi">
+            <span class="payment-icon payment-nequi" aria-hidden="true">N</span>
+            <span><strong>Nequi</strong><small>Pago con Nequi</small></span>
+          </button>
+          <button class="payment-option" type="button" data-method="daviplata">
+            <span class="payment-icon payment-daviplata" aria-hidden="true">D</span>
+            <span><strong>Daviplata</strong><small>Pago con Daviplata</small></span>
+          </button>
+          <button class="payment-option" type="button" data-method="tarjeta">
+            <span class="payment-icon payment-card" aria-hidden="true">T</span>
+            <span><strong>Tarjeta</strong><small>Tarjeta de credito o debito</small></span>
+          </button>
+        </div>
+
+        <div class="payment-secure">
+          <strong>Pago por verificar</strong>
+          <p>Esta accion registra la solicitud de pago. Admin debe confirmarlo para marcarlo como pagado.</p>
+        </div>
+      </div>
+
+      <div class="payment-footer">
+        <button id="cancelPayment" class="payment-cancel" type="button">Cancelar</button>
+        <button id="confirmPayment" class="payment-submit" type="button">Enviar pago</button>
+      </div>
+    </div>
+  </div>
+
+  <a class="whatsapp-float" href="https://wa.me/573206479635" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">WhatsApp</a>
+
+  <script src="css/js/api.js"></script>
+  <script src="css/js/reserva.js"></script>
+</body>
+</html>
